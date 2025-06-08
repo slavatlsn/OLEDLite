@@ -1,6 +1,6 @@
 #include "OLEDLite.h"
 
-Display::Display(uint8_t address) : adr(address) {}
+Display::Display(uint8_t address, uint8_t width, uint8_t height) : adr(address), h(height/8), w(width) {}
 
 void Display::send_command(uint8_t cmd)
 {
@@ -40,7 +40,7 @@ void Display::init()
 
 bool Display::set_pos(uint8_t x, uint8_t y)
 {
-  if (x >= 128 || y >= 8) return false;
+  if (x >= w || y >= h) return false;
   Wire.beginTransmission(adr);
   Wire.write(0x00);
   Wire.write(0xB0 | y);
@@ -80,7 +80,7 @@ bool Display::send_pack(uint8_t data, uint8_t times)
 
 bool Display::send_mult(uint8_t* data, uint8_t size)
 {
-  if (size == 0) return false;
+  if (size == 0 || data == nullptr) return false;
   uint8_t i = 0;
   while (i < size)
   {
@@ -99,7 +99,7 @@ bool Display::send_mult(uint8_t* data, uint8_t size)
 
 void Display::clear()
 {
-  for (uint8_t page = 0; page < 8; page++)
+  for (uint8_t page = 0; page < h; page++)
   {
     Wire.beginTransmission(adr);
     Wire.write(0x00);
