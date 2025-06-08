@@ -1,6 +1,6 @@
 #include "OLEDLite.h"
 
-Display::Display(uint8_t address, uint8_t width, uint8_t height) : adr(address), h(height/8), w(width) {}
+Display::Display(uint8_t address, uint8_t width, uint8_t height) : adr(address), w(width), h(height/8) {}
 
 void Display::send_command(uint8_t cmd)
 {
