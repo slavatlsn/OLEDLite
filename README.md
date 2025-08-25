@@ -64,6 +64,5 @@ void loop() {
 
 MIT — Feel free to use, modify, and distribute. See [LICENSE](LICENSE) for details.
 
----
-
-💡 Tip: Use an I2C scanner sketch to confirm your OLED's address before use.
+## 💡 Tip
+Use an I2C scanner sketch to confirm your OLED's address before use.
